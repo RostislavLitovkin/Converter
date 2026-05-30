@@ -65,7 +65,18 @@ function createLucideIcon(name) {
   svg.setAttribute("stroke-linecap", "round");
   svg.setAttribute("stroke-linejoin", "round");
   svg.setAttribute("aria-hidden", "true");
-  svg.innerHTML = paths;
+
+  const parsed = new DOMParser().parseFromString(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">${paths}</svg>`,
+    "image/svg+xml"
+  );
+  const sourceSvg = parsed.documentElement;
+  if (!sourceSvg || sourceSvg.nodeName.toLowerCase() === "parsererror") {
+    return null;
+  }
+  Array.from(sourceSvg.childNodes).forEach((child) => {
+    svg.appendChild(document.importNode(child, true));
+  });
   return svg;
 }
 
