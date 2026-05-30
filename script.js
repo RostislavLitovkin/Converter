@@ -6,91 +6,6 @@ const autoFormat = document.getElementById("autoFormat");
 const copyBtn = document.getElementById("copyBtn");
 const themeToggle = document.getElementById("themeToggle");
 
-const lucideIcons = {
-  cpu: [
-    '<rect width="16" height="16" x="4" y="4" rx="2" />',
-    '<rect width="6" height="6" x="9" y="9" rx="1" />',
-    '<path d="M9 1v3" />',
-    '<path d="M15 1v3" />',
-    '<path d="M9 20v3" />',
-    '<path d="M15 20v3" />',
-    '<path d="M1 9h3" />',
-    '<path d="M1 15h3" />',
-    '<path d="M20 9h3" />',
-    '<path d="M20 15h3" />'
-  ].join(''),
-  sun: [
-    '<circle cx="12" cy="12" r="4" />',
-    '<path d="M12 2v2" />',
-    '<path d="M12 20v2" />',
-    '<path d="m4.93 4.93 1.41 1.41" />',
-    '<path d="m17.66 17.66 1.41 1.41" />',
-    '<path d="M2 12h2" />',
-    '<path d="M20 12h2" />',
-    '<path d="m6.34 17.66-1.41 1.41" />',
-    '<path d="m19.07 4.93-1.41 1.41" />'
-  ].join(''),
-  moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />',
-  "play-circle": [
-    '<circle cx="12" cy="12" r="10" />',
-    '<path d="m10 8 6 4-6 4Z" />'
-  ].join(''),
-  code: [
-    '<path d="m16 18 6-6-6-6" />',
-    '<path d="m8 6-6 6 6 6" />'
-  ].join(''),
-  copy: [
-    '<rect width="14" height="14" x="8" y="8" rx="2" />',
-    '<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />'
-  ].join(''),
-  info: [
-    '<circle cx="12" cy="12" r="10" />',
-    '<path d="M12 16v-4" />',
-    '<path d="M12 8h.01" />'
-  ].join('')
-};
-
-function createLucideIcon(name) {
-  const paths = lucideIcons[name];
-  if (!paths) return null;
-
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-  svg.setAttribute("width", "1em");
-  svg.setAttribute("height", "1em");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("fill", "none");
-  svg.setAttribute("stroke", "currentColor");
-  svg.setAttribute("stroke-width", "2");
-  svg.setAttribute("stroke-linecap", "round");
-  svg.setAttribute("stroke-linejoin", "round");
-  svg.setAttribute("aria-hidden", "true");
-
-  const parsed = new DOMParser().parseFromString(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">${paths}</svg>`,
-    "image/svg+xml"
-  );
-  const sourceSvg = parsed.documentElement;
-  if (!sourceSvg || sourceSvg.nodeName.toLowerCase() === "parsererror") {
-    return null;
-  }
-  Array.from(sourceSvg.childNodes).forEach((child) => {
-    svg.appendChild(document.importNode(child, true));
-  });
-  return svg;
-}
-
-function replaceLucideSafe() {
-  document.querySelectorAll("[data-lucide]").forEach((element) => {
-    if (element.dataset.lucideReady === "true") return;
-    const icon = createLucideIcon(element.getAttribute("data-lucide"));
-    if (!icon) return;
-    element.textContent = "";
-    element.appendChild(icon);
-    element.dataset.lucideReady = "true";
-  });
-}
-
 function setStatus(message, isError = false) {
   if (statusEl) statusEl.textContent = message;
   const statusIcon = document.getElementById("statusIcon");
@@ -222,7 +137,6 @@ function applyTheme(theme) {
       themeToggle.setAttribute('aria-label', 'Switch to light theme');
     }
   }
-  replaceLucideSafe();
 }
 
 function initTheme() {
@@ -242,7 +156,6 @@ if (themeToggle) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  replaceLucideSafe();
   initTheme();
   if (hexInput && hexInput.value && hexInput.value.trim().length > 0) decodeHex();
 });
