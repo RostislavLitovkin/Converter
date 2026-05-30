@@ -90,8 +90,9 @@ body {
 }
 
 .app {
-  width: 100%;
-  padding: 28px 24px;
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 32px 24px;
   display: grid;
   gap: 6px;
   flex: 1 0 auto;
@@ -109,7 +110,7 @@ label { font-size: 0.95rem; color: var(--muted); text-transform: uppercase; lett
 textarea {
   width: 100%;
   margin: 0;
-  min-height: 160px;
+  min-height: clamp(150px, 32vh, 220px);
   background: var(--panel);
   color: var(--text);
   border: 1px solid var(--border);
@@ -162,24 +163,26 @@ button.ghost { background: transparent; color: var(--text); border: 1px solid va
 }
 
 .site-footer { padding: 14px 0; color: var(--muted); }
-.site-footer .container { width: 100%; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
+.site-footer .container { width: min(100%, 980px); margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
 
 .theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); }
 .icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   width: 1em;
   height: 1em;
-  vertical-align: middle;
-  line-height: 0;
+  color: inherit;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+  vector-effect: non-scaling-stroke;
 }
 .theme-toggle .icon,
 .brand .icon,
 .actions button .icon,
-.status-wrap .icon {
-  flex: 0 0 auto;
-}
+.status-wrap .icon { flex: 0 0 auto; }
 .brand .icon { margin-right: 8px; }
 .actions button .icon { margin-right: 0; }
 .theme-toggle:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
@@ -196,6 +199,64 @@ button.ghost { background: transparent; color: var(--text); border: 1px solid va
 footer { text-align: center; color: var(--muted); font-size: 0.85rem; padding-top: 8px; }
 
 @media (max-width: 720px) {
-  .actions { flex-direction: column; align-items: stretch; }
-  button { width: 52px; }
+  .app {
+    width: 100%;
+    padding: 20px 16px 24px;
+    gap: 12px;
+  }
+
+  .hero-top,
+  .output-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .checkbox {
+    width: 100%;
+  }
+
+  .site-footer .container {
+    width: 100%;
+    padding: 0 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  textarea {
+    min-height: 180px;
+  }
+
+  button {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand h1 {
+    font-size: clamp(1.35rem, 7vw, 1.8rem);
+  }
+
+  .panel {
+    gap: 8px;
+  }
+
+  textarea,
+  .output-box {
+    border-radius: 12px;
+  }
+
+  .output-box {
+    min-height: 180px;
+    padding: 12px;
+  }
 }
