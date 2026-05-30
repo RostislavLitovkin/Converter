@@ -138,21 +138,16 @@ button.ghost { background: transparent; color: var(--text); border: 1px solid va
   vertical-align: middle;
   margin-right: 8px;
   font-style: normal;
+  line-height: 0;
 }
-.theme-toggle i::before,
-.brand i::before,
-.actions button i::before,
-.status-wrap i::before {
-  display: inline-block;
-  line-height: 1;
+.theme-toggle svg,
+.brand svg,
+.actions button svg,
+.status-wrap svg {
+  width: 1em;
+  height: 1em;
+  display: block;
 }
-.brand i::before { content: "⌘"; }
-[data-lucide="sun"]::before { content: "☀"; }
-[data-lucide="moon"]::before { content: "☾"; }
-[data-lucide="play-circle"]::before { content: "▶"; }
-[data-lucide="code"]::before { content: "</>"; }
-[data-lucide="copy"]::before { content: "⧉"; }
-[data-lucide="info"]::before { content: "i"; }
 .theme-toggle:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
 .label-icon { vertical-align: middle; margin-left: 6px; margin-right: 6px; }
 .actions button i, .actions button svg { vertical-align: middle; margin-right: 8px; }
