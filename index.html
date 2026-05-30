@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hex UTF-8 to Text</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <div class="hero-top">
+          <div class="brand">
+            <i data-lucide="cpu"></i>
+            <h1>Hex UTF-8 to Text</h1>
+          </div>
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+            <i data-lucide="sun" class="icon-sun"></i>
+            <i data-lucide="moon" class="icon-moon" style="display:none"></i>
+            <span class="sr-only">Toggle theme</span>
+          </button>
+        </div>
+      </header>
+
+      <section class="panel">
+        <h2>Input</h2>
+        <textarea id="hexInput" placeholder="Paste hex here" aria-label="Hex input"></textarea>
+        <div class="actions">
+          <button id="decodeBtn" aria-label="Decode"><i data-lucide="play-circle"></i><span class="sr-only">Decode</span></button>
+          <label class="checkbox">
+            <input id="autoFormat" type="checkbox" />
+            <i data-lucide="code" class="label-icon"></i>
+            <span>Auto-format JSON</span>
+          </label>
+          <button id="copyBtn" class="ghost" aria-label="Copy output"><i data-lucide="copy"></i><span class="sr-only">Copy output</span></button>
+        </div>
+      </section>
+
+      <section class="panel output">
+        <div class="output-header">
+          <h2>Output</h2>
+          <div class="status-wrap">
+            <i data-lucide="info" id="statusIcon"></i>
+            <span id="status" class="status">Ready</span>
+          </div>
+        </div>
+        <pre id="output" class="output-box" aria-live="polite"></pre>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div>Pluto Labs © 2026</div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
